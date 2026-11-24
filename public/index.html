@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inkspire — stories, ideas, and conversations from curious minds.">
+  <title>Inkspire — Share ideas that matter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Inkspire home"><span>i</span> Inkspire</a>
+    <nav>
+      <button class="nav-link active" data-view="discover">Discover</button>
+      <button class="nav-link auth-only hidden" data-view="mine">My stories</button>
+    </nav>
+    <div class="header-actions">
+      <button class="button ghost guest-only" data-auth="login">Log in</button>
+      <button class="button dark guest-only" data-auth="register">Join Inkspire</button>
+      <button class="button coral auth-only hidden" id="new-post">Write a story</button>
+      <div class="profile auth-only hidden">
+        <button class="avatar" id="profile-button" aria-label="Account menu"></button>
+        <div class="profile-menu hidden" id="profile-menu"><strong id="profile-name"></strong><span id="profile-email"></span><button id="logout">Log out</button></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A PLACE FOR CURIOUS MINDS</p>
+        <h1>Ideas worth<br><em>sharing.</em></h1>
+        <p>Read thoughtful stories, share what you know, and join conversations that move ideas forward.</p>
+        <button class="button coral hero-cta" id="start-writing">Start writing <span>→</span></button>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="paper paper-one"></div><div class="paper paper-two"></div><div class="pen"></div>
+        <span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">•</span>
+      </div>
+    </section>
+
+    <section class="content-shell">
+      <div class="section-heading">
+        <div><p class="eyebrow" id="section-kicker">EXPLORE STORIES</p><h2 id="section-title">Fresh perspectives</h2></div>
+        <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search stories"></label>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="post-grid" id="post-grid"></div>
+      <div class="empty hidden" id="empty"><div>✎</div><h3>No stories here yet</h3><p>Try another search, or be the first to publish something wonderful.</p></div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#"><span>i</span> Inkspire</a><p>Good ideas grow when they are shared.</p><small>© 2026 Inkspire. Built for curious minds.</small></footer>
+
+  <dialog id="auth-dialog" class="modal auth-modal">
+    <button class="modal-close" data-close aria-label="Close">×</button>
+    <p class="eyebrow" id="auth-kicker">WELCOME BACK</p><h2 id="auth-title">Log in to Inkspire</h2><p id="auth-subtitle">Continue the conversation.</p>
+    <form id="auth-form">
+      <label class="register-field hidden">Name<input name="name" autocomplete="name" minlength="2" maxlength="50"></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+      <p class="form-error" id="auth-error"></p><button class="button coral full" type="submit">Log in</button>
+    </form>
+    <p class="switch-auth">New here? <button id="switch-auth">Create an account</button></p>
+  </dialog>
+
+  <dialog id="editor-dialog" class="modal editor-modal">
+    <button class="modal-close" data-close aria-label="Close">×</button><p class="eyebrow">YOUR STORY</p><h2 id="editor-title">Write something memorable</h2>
+    <form id="editor-form">
+      <input type="hidden" name="id">
+      <label>Title<input name="title" minlength="3" maxlength="120" placeholder="A title that draws readers in" required></label>
+      <label>Short introduction<textarea name="excerpt" minlength="10" maxlength="240" rows="2" placeholder="Give readers a reason to keep going" required></textarea></label>
+      <label>Category<input name="category" minlength="2" maxlength="30" list="category-options" placeholder="e.g. Design" required></label>
+      <datalist id="category-options"><option>Creativity</option><option>Design</option><option>Technology</option><option>Life</option><option>Culture</option></datalist>
+      <label>Your story<textarea name="content" minlength="20" maxlength="10000" rows="11" placeholder="Tell your story…" required></textarea></label>
+      <p class="form-error" id="editor-error"></p>
+      <div class="editor-actions"><button class="button ghost" type="submit" data-status="draft">Save draft</button><button class="button coral" type="submit" data-status="published">Publish story</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="story-dialog" class="modal story-modal"><button class="modal-close" data-close aria-label="Close">×</button><article id="story-content"></article></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
